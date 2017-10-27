@@ -7,5 +7,6 @@
 ~$ sudo chmod 755 firewall/firewall.sh
 
 ~$ sudo firewall/firewall.sh
+
 Usage: firewall/firewall.sh {start|stop|restart|status}
 
