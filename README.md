@@ -1,2 +1,2 @@
 # firewall
-# firewall
+# simple iptables firewall
