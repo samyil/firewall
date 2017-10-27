@@ -1,2 +1,1 @@
-# firewall
 # simple iptables firewall
