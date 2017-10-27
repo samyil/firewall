@@ -25,6 +25,7 @@ iptables -A INPUT -i lo -j ACCEPT
 #iptables -A INPUT -p tcp -m multiport --dports 25,110,143,465,587,993,995 -j ACCEPT
 #iptables -A INPUT -p gre -j ACCEPT
 #iptables -A INPUT -p tcp --dport 1723 -j ACCEPT
+#iptables -A OUTPUT -p tcp --tcp-flags SYN,RST SYN -j TCPMSS --clamp-mss-to-pmtu
 iptables -A INPUT -p tcp --dport 22 -j ACCEPT
 iptables -A INPUT -p icmp -j ACCEPT
 iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
