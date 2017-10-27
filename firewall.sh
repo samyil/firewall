@@ -2,6 +2,7 @@
 
 start() {
 echo "start firewall"
+
 ip6tables -A INPUT -i lo -j ACCEPT
 #ip6tables -A INPUT -s e80::/16 -j ACCEPT
 #ip6tables -A INPUT -s ff02::/16 -j ACCEPT
@@ -25,6 +26,23 @@ iptables -A INPUT -i lo -j ACCEPT
 iptables -A INPUT -p tcp --dport 22 -j ACCEPT
 iptables -A INPUT -p icmp -j ACCEPT
 iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+
+#WHITELIST="
+#192.168.0.44
+#192.168.0.55
+#192.168.60.0/24";
+#for i in $WHITELIST ; do
+#iptables -A INPUT -s $i -j ACCEPT
+#done;
+
+#BLACKLIST="
+#192.168.0.22
+#192.168.0.33
+#192.168.40.0/24";
+#for i in $BLACKLIST ; do
+#iptables -A INPUT -s $i -j DROP
+#done;
+
 iptables -A INPUT -m state --state INVALID -j DROP
 iptables -A INPUT -j DROP
 }
