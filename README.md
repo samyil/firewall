@@ -1,4 +1,4 @@
-# Simple Iptables Firewall for personal computer
+# Simple Iptables Firewall
 
 ~$ sudo apt-get install git
 
