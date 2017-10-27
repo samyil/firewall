@@ -18,7 +18,10 @@ iptables -A INPUT -i lo -j ACCEPT
 #iptables -A INPUT -p tcp -m multiport --dports 135,137:139,445 -s 192.168.0.0/16 -j ACCEPT
 #iptables -A INPUT -p udp -m multiport --dports 135,137:139,445 -s 192.168.0.0/16 -j ACCEPT
 #iptables -A INPUT -p tcp --dport 21 -j ACCEPT
+#iptables -A INPUT -p udp --dport 53 -j ACCEPT
+#iptables -A INPUT -p udp --dport 123 -j ACCEPT
 #iptables -A INPUT -p tcp -m multiport --dports 80,443 -j DROP
+#iptables -A INPUT -p tcp -m multiport --dports 25,110,143,465,587,993,995 -j ACCEPT
 iptables -A INPUT -p tcp --dport 22 -j ACCEPT
 iptables -A INPUT -p icmp -j ACCEPT
 iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
