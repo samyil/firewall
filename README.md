@@ -8,6 +8,8 @@
 Usage: firewall/firewall.sh {start|stop|restart|status}
 </pre>
 
+<hr>
+
 # Enable rc.local on systemd
 
 <pre>sudo nano /etc/systemd/system/rc-local.service</pre>
@@ -29,11 +31,6 @@ SysVStartPriority=99
 WantedBy=multi-user.target
 </pre>
 
-<pre>
-sudo touch /etc/rc.local
-sudo chmod 755 /etc/rc.local
-</pre>
-
 <pre>sudo nano /etc/rc.local</pre>
 
 <pre>
@@ -51,6 +48,10 @@ sudo chmod 755 /etc/rc.local
 # By default this script does nothing.
 
 exit 0
+</pre>
+
+<pre>
+sudo chmod 755 /etc/rc.local
 </pre>
 
 <pre>
