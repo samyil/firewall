@@ -26,9 +26,8 @@ iptables -A INPUT -i lo -j ACCEPT
 #iptables -A INPUT -p gre -j ACCEPT
 #iptables -A INPUT -p tcp --dport 1723 -j ACCEPT
 iptables -A INPUT -p tcp --dport 22 -m state --state NEW -j ACCEPT
-iptables -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
-iptables -A INPUT -p icmp -m icmp --icmp-type 8 -m limit --limit 2/sec -j ACCEPT
-iptables -A INPUT -p icmp -m icmp --icmp-type 8 -j DROP
+iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+iptables -A INPUT -p icmp -j ACCEPT
 iptables -A INPUT -m state --state INVALID -j DROP
 iptables -A INPUT -j DROP
 #sh -c "echo 1 >/proc/sys/net/ipv4/ip_forward"
