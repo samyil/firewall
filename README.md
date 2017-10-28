@@ -8,8 +8,6 @@
 Usage: firewall/firewall.sh {start|stop|restart|status}
 </pre>
 
-<hr>
-
 # Enable rc.local on systemd
 
 <pre>sudo nano /etc/systemd/system/rc-local.service</pre>
