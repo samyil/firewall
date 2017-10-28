@@ -10,13 +10,13 @@
 
 Usage: firewall/firewall.sh {start|stop|restart|status}
 
------------------------------------------------------------
+<hr>
 
 # Enable rc.local on systemd
 
-sudo nano /etc/systemd/system/rc-local.service
+<pre>sudo nano /etc/systemd/system/rc-local.service</pre>
 
-</pre>
+<pre>
 [Unit]
 Description=/etc/rc.local Compatibility
 ConditionPathExists=/etc/rc.local
@@ -32,14 +32,14 @@ SysVStartPriority=99
 [Install]
 WantedBy=multi-user.target
 </pre>
---------------------------------------------------------
 
+<pre>
 sudo touch /etc/rc.local
 sudo chmod 755 /etc/rc.local
+</pre>
 
---------------------------------------------------------
+<pre>sudo nano /etc/rc.local</pre>
 
-sudo nano /etc/rc.local
 <pre>
 #!/bin/sh -e
 #
@@ -56,13 +56,13 @@ sudo nano /etc/rc.local
 
 exit 0
 </pre>
------------------------------------------------------
 
+<pre>
 sudo systemctl enable rc-local
 sudo systemctl start rc-local.service
 sudo systemctl status rc-local.service
+</pre>
 
------------------------------------------------------
 
-sudo nano /etc/rc.local
-/home/samyil/firewall/firewall.sh start
+<pre>sudo nano /etc/rc.local</pre>
+<pre>/home/samyil/firewall/firewall.sh start</pre>
