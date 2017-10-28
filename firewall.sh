@@ -4,70 +4,42 @@
 # Author: Samuil Arsov <samyil101@gmail.com>
 
 start() {
-echo -e "Start Firewall"
+echo -e "start firewall"
 
 ip6tables -A INPUT -i lo -j ACCEPT
-#ip6tables -A INPUT -s e80::/16 -m state --state NEW -j ACCEPT
-#ip6tables -A INPUT -s ff02::/16 -m state --state NEW -j ACCEPT
-#ip6tables -A INPUT -p tcp --dport 22 -j LOG --log-level 7 --log-prefix "ipv6 SSH: "
+ip6tables -A INPUT -s e80::/16 -m state --state NEW -m comment --comment "localnet" -j ACCEPT
+ip6tables -A INPUT -s ff02::/16 -m state --state NEW -m comment --comment "localnet" -j ACCEPT
+ip6tables -A INPUT -p tcp --dport 22 -j LOG --log-level 7
 ip6tables -A INPUT -p tcp --dport 22 -m state --state NEW -j ACCEPT
 ip6tables -A INPUT -p ipv6-icmp -j ACCEPT
 ip6tables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 ip6tables -A INPUT -m state --state INVALID -j DROP
 ip6tables -A INPUT -j DROP
-#sh -c "echo 1 >/proc/sys/net/ipv6/conf/all/forwarding"
 ip6tables -A OUTPUT -m state --state INVALID -j DROP
 
 iptables -A INPUT -i lo -j ACCEPT
-#iptables -A INPUT -s 192.168.0.0/16 -m state --state NEW -j ACCEPT
-#iptables -A INPUT -s 172.16.0.0/12 -m state --state NEW -j ACCEPT
-#iptables -A INPUT -s 10.10.10.11 -m state --state NEW -m comment --comment "user11" -j ACCEPT
-#iptables -A INPUT -s 10.10.10.12 -m state --state NEW -m comment --comment "user12" -j ACCEPT
-#iptables -A INPUT -p tcp -m multiport --dports 135,137:139,445 -s 192.168.0.0/16 -m state --state NEW -j ACCEPT
-#iptables -A INPUT -p udp -m multiport --dports 135,137:139,445 -s 192.168.0.0/16 -m state --state NEW -j ACCEPT
-#iptables -A INPUT -p tcp --dport 21 -m state --state NEW -j ACCEPT
-#iptables -A INPUT -p udp --dport 53 -m state --state NEW -j ACCEPT
-#iptables -A INPUT -p udp --dport 123 -m state --state NEW -j ACCEPT
-#iptables -A INPUT -p tcp -m multiport --dports 80,443 -m state --state NEW -j ACCEPT
-#iptables -A INPUT -p tcp -m multiport --dports 25,110,143,465,587,993,995 -m state --state NEW -j ACCEPT
-#iptables -A INPUT -p gre -j ACCEPT
-#iptables -A INPUT -p tcp --dport 1723 -m state --state NEW -j ACCEPT
-#iptables -A INPUT -p tcp --dport 22 -j LOG --log-level 7 --log-prefix "ipv4 SSH: "
+iptables -A INPUT -s 192.168.0.0/16 -m state --state NEW -m comment --comment "localnet" -j ACCEPT
+iptables -A INPUT -s 172.16.0.0/12 -m state --state NEW -m comment --comment "localnet" -j ACCEPT
+iptables -A INPUT -s 10.0.0.0/8 -m state --state NEW -m comment --comment "localnet" -j ACCEPT
+iptables -A INPUT -p tcp --dport 22 -j LOG --log-level 7
 iptables -A INPUT -p tcp --dport 22 -m state --state NEW -j ACCEPT
 iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 iptables -A INPUT -p icmp -j ACCEPT
 iptables -A INPUT -m state --state INVALID -j DROP
 iptables -A INPUT -j DROP
-#sh -c "echo 1 >/proc/sys/net/ipv4/ip_forward"
-#iptables -A PREROUTING -i tun0 -p tcp --dport 80 -j DNAT --to 192.168.0.10:80
-#iptables -A POSTROUTING -o tun0 -j MASQUERADE
-#iptables -A POSTROUTING -o tun0 -p tcp --tcp-flags SYN,RST SYN -j TCPMSS --clamp-mss-to-pmtu
-#iptables -A OUTPUT -p tcp --tcp-flags SYN,RST SYN -j TCPMSS --clamp-mss-to-pmtu
 iptables -A OUTPUT -m state --state INVALID -j DROP
 }
 
 stop() {
-echo "Stop Firewall"
+echo "stop firewall"
 ip6tables -F
-ip6tables -X
-ip6tables -P INPUT ACCEPT
-ip6tables -P FORWARD ACCEPT
-ip6tables -P OUTPUT ACCEPT
-
 iptables -F
-iptables -X
-iptables -F -t nat
-iptables -X -t nat
-iptables -P INPUT ACCEPT
-iptables -P FORWARD ACCEPT
-iptables -P OUTPUT ACCEPT
 }
 
 status() {
-echo "Status IPv6 firewall"
+echo "status firewall"
 ip6tables -nvL --line-number
 echo ""
-echo "Status IPv4 firewall"
 iptables -nvL --line-number
 }
 
