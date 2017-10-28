@@ -13,6 +13,15 @@ ip6tables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 ip6tables -A INPUT -m state --state INVALID -j DROP
 ip6tables -A INPUT -j DROP
 
+iptables -F
+iptables -X
+iptables -F -t nat
+iptables -X -t nat
+iptables -F -t filter
+iptables -X -t filter
+iptables -P INPUT ACCEPT
+iptables -P FORWARD ACCEPT
+iptables -P OUTPUT ACCEPT
 iptables -A INPUT -i lo -j ACCEPT
 #iptables -A INPUT -s 192.168.0.0/16 -m state --state NEW -j ACCEPT
 #iptables -A INPUT -s 172.16.0.0/12 -m state --state NEW -j ACCEPT
