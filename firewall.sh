@@ -31,7 +31,6 @@ iptables -A INPUT -p tcp --dport 22 -m state --state NEW -j ACCEPT
 iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 iptables -A INPUT -p icmp -j ACCEPT
 iptables -A INPUT -m state --state INVALID -j DROP
-#iptables -A INPUT -j LOG --log-prefix "Drop INPUT: "
 iptables -A INPUT -j DROP
 #sh -c "echo 1 >/proc/sys/net/ipv4/ip_forward"
 #iptables -A PREROUTING -i tun0 -p tcp --dport 80 -j DNAT --to 192.168.0.10:80
