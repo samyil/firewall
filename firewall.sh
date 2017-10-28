@@ -3,6 +3,8 @@
 start() {
 echo "start firewall"
 
+ip6tables -F
+ip6tables -X
 ip6tables -A INPUT -i lo -j ACCEPT
 #ip6tables -A INPUT -s e80::/16 -m state --state NEW -j ACCEPT
 #ip6tables -A INPUT -s ff02::/16 -m state --state NEW -j ACCEPT
@@ -12,6 +14,7 @@ ip6tables -A INPUT -p ipv6-icmp -j ACCEPT
 ip6tables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 ip6tables -A INPUT -m state --state INVALID -j DROP
 ip6tables -A INPUT -j DROP
+ip6tables -A OUTPUT -m state --state INVALID -j DROP
 
 iptables -F
 iptables -X
@@ -58,6 +61,7 @@ iptables -F
 status() {
 echo "status firewall"
 ip6tables -nvL --line-number
+echo ""
 iptables -nvL --line-number
 }
 
