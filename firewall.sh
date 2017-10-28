@@ -9,7 +9,7 @@ echo -e "start firewall"
 ip6tables -A INPUT -i lo -j ACCEPT
 ip6tables -A INPUT -s e80::/16 -m state --state NEW -m comment --comment "localnet" -j ACCEPT
 ip6tables -A INPUT -s ff02::/16 -m state --state NEW -m comment --comment "localnet" -j ACCEPT
-ip6tables -A INPUT -p tcp --dport 22 -j LOG --log-level 7
+ip6tables -A INPUT -p tcp --dport 22 -m state --state NEW -j LOG
 ip6tables -A INPUT -p tcp --dport 22 -m state --state NEW -j ACCEPT
 ip6tables -A INPUT -p ipv6-icmp -j ACCEPT
 ip6tables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
@@ -21,7 +21,7 @@ iptables -A INPUT -i lo -j ACCEPT
 iptables -A INPUT -s 192.168.0.0/16 -m state --state NEW -m comment --comment "localnet" -j ACCEPT
 iptables -A INPUT -s 172.16.0.0/12 -m state --state NEW -m comment --comment "localnet" -j ACCEPT
 iptables -A INPUT -s 10.0.0.0/8 -m state --state NEW -m comment --comment "localnet" -j ACCEPT
-iptables -A INPUT -p tcp --dport 22 -j LOG --log-level 7
+iptables -A INPUT -p tcp --dport 22 -m state --state NEW -j LOG
 iptables -A INPUT -p tcp --dport 22 -m state --state NEW -j ACCEPT
 iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 iptables -A INPUT -p icmp -j ACCEPT
