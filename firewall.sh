@@ -6,6 +6,7 @@ echo "start firewall"
 ip6tables -A INPUT -i lo -j ACCEPT
 #ip6tables -A INPUT -s e80::/16 -m state --state NEW -j ACCEPT
 #ip6tables -A INPUT -s ff02::/16 -m state --state NEW -j ACCEPT
+#ip6tables -A INPUT -p tcp --dport 22 -j LOG --log-level 7 --log-prefix "ipv6 SSH: "
 ip6tables -A INPUT -p tcp --dport 22 -m state --state NEW -j ACCEPT
 ip6tables -A INPUT -p ipv6-icmp -j ACCEPT
 ip6tables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
@@ -25,6 +26,7 @@ iptables -A INPUT -i lo -j ACCEPT
 #iptables -A INPUT -p tcp -m multiport --dports 25,110,143,465,587,993,995 -m state --state NEW -j ACCEPT
 #iptables -A INPUT -p gre -j ACCEPT
 #iptables -A INPUT -p tcp --dport 1723 -m state --state NEW -j ACCEPT
+#iptables -A INPUT -p tcp --dport 22 -j LOG --log-level 7 --log-prefix "ipv4 SSH: "
 iptables -A INPUT -p tcp --dport 22 -m state --state NEW -j ACCEPT
 iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 iptables -A INPUT -p icmp -j ACCEPT
