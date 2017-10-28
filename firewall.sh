@@ -4,27 +4,27 @@ start() {
 echo "start firewall"
 
 ip6tables -A INPUT -i lo -j ACCEPT
-#ip6tables -A INPUT -s e80::/16 -j ACCEPT
-#ip6tables -A INPUT -s ff02::/16 -j ACCEPT
-ip6tables -A INPUT -p tcp --dport 22 -j ACCEPT
+#ip6tables -A INPUT -s e80::/16 -m state --state NEW -j ACCEPT
+#ip6tables -A INPUT -s ff02::/16 -m state --state NEW -j ACCEPT
+ip6tables -A INPUT -p tcp --dport 22 -m state --state NEW -j ACCEPT
 ip6tables -A INPUT -p ipv6-icmp -j ACCEPT
 ip6tables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 ip6tables -A INPUT -m state --state INVALID -j DROP
 ip6tables -A INPUT -j DROP
 
 iptables -A INPUT -i lo -j ACCEPT
-#iptables -A INPUT -s 192.168.0.0/16 -j ACCEPT
-#iptables -A INPUT -s 172.16.0.0/12 -j ACCEPT
-#iptables -A INPUT -s 10.0.0.0/8 -j ACCEPT
-#iptables -A INPUT -p tcp -m multiport --dports 135,137:139,445 -s 192.168.0.0/16 -j ACCEPT
-#iptables -A INPUT -p udp -m multiport --dports 135,137:139,445 -s 192.168.0.0/16 -j ACCEPT
-#iptables -A INPUT -p tcp --dport 21 -j ACCEPT
-#iptables -A INPUT -p udp --dport 53 -j ACCEPT
-#iptables -A INPUT -p udp --dport 123 -j ACCEPT
-#iptables -A INPUT -p tcp -m multiport --dports 80,443 -j ACCEPT
-#iptables -A INPUT -p tcp -m multiport --dports 25,110,143,465,587,993,995 -j ACCEPT
-#iptables -A INPUT -p gre -j ACCEPT
-#iptables -A INPUT -p tcp --dport 1723 -j ACCEPT
+#iptables -A INPUT -s 192.168.0.0/16 -m state --state NEW -j ACCEPT
+#iptables -A INPUT -s 172.16.0.0/12 -m state --state NEW -j ACCEPT
+#iptables -A INPUT -s 10.0.0.0/8 -m state --state NEW -j ACCEPT
+#iptables -A INPUT -p tcp -m multiport --dports 135,137:139,445 -s 192.168.0.0/16 -m state --state NEW -j ACCEPT
+#iptables -A INPUT -p udp -m multiport --dports 135,137:139,445 -s 192.168.0.0/16 -m state --state NEW -j ACCEPT
+#iptables -A INPUT -p tcp --dport 21 -m state --state NEW -j ACCEPT
+#iptables -A INPUT -p udp --dport 53 -m state --state NEW -j ACCEPT
+#iptables -A INPUT -p udp --dport 123 -m state --state NEW -j ACCEPT
+#iptables -A INPUT -p tcp -m multiport --dports 80,443 -m state --state NEW -j ACCEPT
+#iptables -A INPUT -p tcp -m multiport --dports 25,110,143,465,587,993,995 -m state --state NEW -j ACCEPT
+#iptables -A INPUT -p gre -m state --state NEW -j ACCEPT
+#iptables -A INPUT -p tcp --dport 1723 -m state --state NEW -j ACCEPT
 iptables -A INPUT -p tcp --dport 22 -m state --state NEW -j ACCEPT
 iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 iptables -A INPUT -p icmp -j ACCEPT
