@@ -32,14 +32,12 @@ iptables -A OUTPUT -m state --state INVALID -j DROP
 
 stop() {
 echo "stop firewall"
-
 ip6tables -F
 iptables -F
 }
 
 status() {
 echo "status firewall"
-
 ip6tables -nvL --line-number
 echo ""
 iptables -nvL --line-number
