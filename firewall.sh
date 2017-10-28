@@ -23,7 +23,7 @@ iptables -A INPUT -i lo -j ACCEPT
 #iptables -A INPUT -p udp --dport 123 -m state --state NEW -j ACCEPT
 #iptables -A INPUT -p tcp -m multiport --dports 80,443 -m state --state NEW -j ACCEPT
 #iptables -A INPUT -p tcp -m multiport --dports 25,110,143,465,587,993,995 -m state --state NEW -j ACCEPT
-#iptables -A INPUT -p gre -m state --state NEW -j ACCEPT
+#iptables -A INPUT -p gre -j ACCEPT
 #iptables -A INPUT -p tcp --dport 1723 -m state --state NEW -j ACCEPT
 iptables -A INPUT -p tcp --dport 22 -m state --state NEW -j ACCEPT
 iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
