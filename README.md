@@ -16,6 +16,7 @@ Usage: firewall/firewall.sh {start|stop|restart|status}
 
 sudo nano /etc/systemd/system/rc-local.service
 
+</pre>
 [Unit]
 Description=/etc/rc.local Compatibility
 ConditionPathExists=/etc/rc.local
@@ -30,7 +31,7 @@ SysVStartPriority=99
 
 [Install]
 WantedBy=multi-user.target
-
+</pre>
 --------------------------------------------------------
 
 sudo touch /etc/rc.local
@@ -39,7 +40,7 @@ sudo chmod 755 /etc/rc.local
 --------------------------------------------------------
 
 sudo nano /etc/rc.local
-
+<pre>
 #!/bin/sh -e
 #
 # rc.local
@@ -54,7 +55,7 @@ sudo nano /etc/rc.local
 # By default this script does nothing.
 
 exit 0
-
+</pre>
 -----------------------------------------------------
 
 sudo systemctl enable rc-local
